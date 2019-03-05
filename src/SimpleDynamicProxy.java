@@ -15,17 +15,17 @@ public class SimpleDynamicProxy {
     }
 
     static class DynamicProxy implements InvocationHandler{
-        Object originalObj;
+        Object obj;
 
-        Object bind(Object originalObj){
-            this.originalObj = originalObj;
-            return Proxy.newProxyInstance(originalObj.getClass().getClassLoader(),originalObj.getClass().getInterfaces(),this);
+        Object bind(Object obj){
+            this.obj = obj;
+            return Proxy.newProxyInstance(obj.getClass().getClassLoader(),obj.getClass().getInterfaces(),this);
         }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
             System.out.println("Welcome!");
-            return method.invoke(originalObj, args);
+            return method.invoke(obj, args);
         }
     }
 
